@@ -1,13 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useRef, useState, useEffect } from 'react';
 import {
-  getDownloadURL,
-  getStorage,
-  ref,
-  uploadBytesResumable,
-} from 'firebase/storage';
-import { app } from '../firebase';
-import {
   updateUserStart,
   updateUserSuccess,
   updateUserFailure,
@@ -18,6 +11,7 @@ import {
 } from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+
 export default function Profile() {
   const fileRef = useRef(null);
   const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -30,41 +24,26 @@ export default function Profile() {
   const [userListings, setUserListings] = useState([]);
   const dispatch = useDispatch();
 
-  // firebase storage
-  // allow read;
-  // allow write: if
-  // request.resource.size < 2 * 1024 * 1024 &&
-  // request.resource.contentType.matches('image/.*')
+  const handleFileUpload = (file) => {
+    // Convert the file to base64
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    
+    reader.onloadend = () => {
+      const base64File = reader.result;
+      setFormData({ ...formData, avatar: base64File });
+    };
+    
+    reader.onerror = () => {
+      setFileUploadError(true);
+    };
+  };
 
   useEffect(() => {
     if (file) {
       handleFileUpload(file);
     }
   }, [file]);
-
-  const handleFileUpload = (file) => {
-    const storage = getStorage(app);
-    const fileName = new Date().getTime() + file.name;
-    const storageRef = ref(storage, fileName);
-    const uploadTask = uploadBytesResumable(storageRef, file);
-
-    uploadTask.on(
-      'state_changed',
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        setFilePerc(Math.round(progress));
-      },
-      (error) => {
-        setFileUploadError(true);
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
-          setFormData({ ...formData, avatar: downloadURL })
-        );
-      }
-    );
-  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -160,6 +139,7 @@ export default function Profile() {
       console.log(error.message);
     }
   };
+
   return (
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
