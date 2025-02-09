@@ -12,6 +12,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.0",
     "firebase": "^11.1.0",
+    "flowbite-react": "^0.10.2",
     "google-auth-library": "^9.15.0",
     "googleapis": "^144.0.0",
     "multer": "^1.4.5-lts.1",
@@ -22,7 +23,8 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.1.1",
     "redux-persist": "^6.0.0",
-    "safe-buffer": "^5.2.1"
+    "safe-buffer": "^5.2.1",
+    "swiper": "^11.2.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
