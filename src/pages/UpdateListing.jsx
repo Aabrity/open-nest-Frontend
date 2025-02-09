@@ -158,7 +158,7 @@ export default function UpdateListing() {
           <input
             type='text'
             placeholder='Name'
-            className='border p-3 rounded-lg'
+            className='border p-3 rounded-lg dark:bg-gray-800 dark:text-white dark:border-gray-700'
             id='name'
             maxLength='62'
             minLength='10'
@@ -169,7 +169,7 @@ export default function UpdateListing() {
           <textarea
             type='text'
             placeholder='Description'
-            className='border p-3 rounded-lg'
+            className='border p-3 rounded-lg dark:bg-gray-800 dark:text-white dark:border-gray-700'
             id='description'
             required
             onChange={handleChange}
@@ -178,7 +178,7 @@ export default function UpdateListing() {
           <input
             type='text'
             placeholder='Address'
-            className='border p-3 rounded-lg'
+            className='border p-3 rounded-lg dark:bg-gray-800 dark:text-white dark:border-gray-700'
             id='address'
             required
             onChange={handleChange}
@@ -189,7 +189,7 @@ export default function UpdateListing() {
               <input
                 type='checkbox'
                 id='sale'
-                className='w-5'
+                className='w-5 dark:bg-gray-800 dark:text-white dark:border-gray-700'
                 onChange={handleChange}
                 checked={formData.type === 'sale'}
               />
@@ -199,7 +199,7 @@ export default function UpdateListing() {
               <input
                 type='checkbox'
                 id='rent'
-                className='w-5'
+                className='w-5 dark:bg-gray-800 dark:text-white dark:border-gray-700'
                 onChange={handleChange}
                 checked={formData.type === 'rent'}
               />
@@ -209,7 +209,7 @@ export default function UpdateListing() {
               <input
                 type='checkbox'
                 id='parking'
-                className='w-5'
+                className='w-5 dark:bg-gray-800 dark:text-white dark:border-gray-700'
                 onChange={handleChange}
                 checked={formData.parking}
               />
@@ -219,7 +219,7 @@ export default function UpdateListing() {
               <input
                 type='checkbox'
                 id='furnished'
-                className='w-5'
+                className='w-5 dark:bg-gray-800 dark:text-white dark:border-gray-700'
                 onChange={handleChange}
                 checked={formData.furnished}
               />
@@ -229,7 +229,7 @@ export default function UpdateListing() {
               <input
                 type='checkbox'
                 id='offer'
-                className='w-5'
+                className='w-5 dark:bg-gray-800 dark:text-white dark:border-gray-700'
                 onChange={handleChange}
                 checked={formData.offer}
               />
@@ -244,7 +244,7 @@ export default function UpdateListing() {
                 min='1'
                 max='10'
                 required
-                className='p-3 border border-gray-300 rounded-lg'
+                className='p-3 border border-gray-300 rounded-lg dark:bg-gray-800 dark:text-white dark:border-gray-700'
                 onChange={handleChange}
                 value={formData.bedrooms}
               />
@@ -257,7 +257,7 @@ export default function UpdateListing() {
                 min='1'
                 max='10'
                 required
-                className='p-3 border border-gray-300 rounded-lg'
+                className='p-3 border border-gray-300 rounded-lg dark:bg-gray-800 dark:text-white dark:border-gray-700'
                 onChange={handleChange}
                 value={formData.bathrooms}
               />
@@ -270,7 +270,7 @@ export default function UpdateListing() {
                 min='50'
                 max='10000000'
                 required
-                className='p-3 border border-gray-300 rounded-lg'
+                className='p-3 border border-gray-300 rounded-lg dark:bg-gray-800 dark:text-white dark:border-gray-700'
                 onChange={handleChange}
                 value={formData.regularPrice}
               />
@@ -289,7 +289,7 @@ export default function UpdateListing() {
                   min='0'
                   max='10000000'
                   required
-                  className='p-3 border border-gray-300 rounded-lg'
+                  className='p-3 border border-gray-300 rounded-lg dark:bg-gray-800 dark:text-white dark:border-gray-700'
                   onChange={handleChange}
                   value={formData.discountPrice}
                 />
@@ -324,7 +324,7 @@ export default function UpdateListing() {
               type='button'
               disabled={uploading}
               onClick={handleImageSubmit}
-              className='p-3 text-green-700 border border-green-700 rounded uppercase hover:shadow-lg disabled:opacity-80'
+              className='p-3 text-green-700 border border-green-700 rounded uppercase hover:shadow-lg disabled:opacity-80 dark:bg-slate-700 dark:text-white dark:border-gray-700'
             >
               {uploading ? 'Uploading...' : 'Upload'}
             </button>
