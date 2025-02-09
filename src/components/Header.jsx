@@ -95,7 +95,7 @@ export default function Header() {
               {theme === 'light' ? <FaSun /> : <FaMoon />}
             </Button>
             {currentUser ? (
-              <Link to='/profile'>
+              <Link to='/dashboard'>
                 <img
                   className='rounded-full h-8 w-7 object-cover'
                   src={currentUser.avatar}
