@@ -1,20 +1,19 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore from 'swiper';
-import { useSelector } from 'react-redux';
-import { Navigation } from 'swiper/modules';
-import 'swiper/css/bundle';
 import {
-  FaBath,
-  FaBed,
-  FaChair,
-  FaMapMarkedAlt,
-  FaMapMarkerAlt,
-  FaParking,
-  FaShare,
+    FaBath,
+    FaBed,
+    FaChair,
+    FaMapMarkerAlt,
+    FaParking,
+    FaShare
 } from 'react-icons/fa';
-import Contact from '../components/Contact';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import SwiperCore from 'swiper';
+import 'swiper/css/bundle';
+import { Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+// import Contact from '../components/Contact';
 
 
 export default function Listing() {
@@ -51,9 +50,9 @@ export default function Listing() {
 
   return (
     <main>
-      {loading && <p className='text-center my-7 text-2xl'>Loading...</p>}
+      {loading && <p className='text-center my-7 text-2xl dark: text-white'>Loading...</p>}
       {error && (
-        <p className='text-center my-7 text-2xl'>Something went wrong!</p>
+        <p className='text-center my-7 text-2xl dark: text-white'>Something went wrong!</p>
       )}
       {listing && !loading && !error && (
         <div>
@@ -70,9 +69,9 @@ export default function Listing() {
               </SwiperSlide>
             ))}
           </Swiper>
-          <div className='fixed top-[13%] right-[3%] z-10 border rounded-full w-12 h-12 flex justify-center items-center bg-slate-100 cursor-pointer'>
+          <div className='fixed top-[13%] right-[3%] z-10 border rounded-full w-12 h-12 flex justify-center items-center bg-slate-100 cursor-pointer dark: bg-slate-700'>
             <FaShare
-              className='text-slate-500'
+              className='text-white dark:text-white '
               onClick={() => {
                 navigator.clipboard.writeText(window.location.href);
                 setCopied(true);
@@ -83,54 +82,54 @@ export default function Listing() {
             />
           </div>
           {copied && (
-            <p className='fixed top-[23%] right-[5%] z-10 rounded-md bg-slate-100 p-2'>
+            <p className='fixed top-[23%] right-[5%] z-10 rounded-md bg-slate-100 p-2 dark:text-white dark:bg-slate-700'>
               Link copied!
             </p>
           )}
           <div className='flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4'>
-            <p className='text-2xl font-semibold'>
+            <p className='text-2xl font-semibold text-black dark:text-white'>
               {listing.name} - ${' '}
               {listing.offer
                 ? listing.discountPrice.toLocaleString('en-US')
                 : listing.regularPrice.toLocaleString('en-US')}
               {listing.type === 'rent' && ' / month'}
             </p>
-            <p className='flex items-center mt-6 gap-2 text-slate-600  text-sm'>
+            <p className='flex items-center mt-6 gap-2 text-slate-600  text-sm dark:text-white'>
               <FaMapMarkerAlt className='text-green-700' />
               {listing.address}
             </p>
             <div className='flex gap-4'>
-              <p className='bg-red-900 w-full max-w-[200px] text-white text-center p-1 rounded-md'>
+              <p className='bg-red-900 w-full max-w-[200px] text-white text-center p-1 rounded-md dark:text-white'>
                 {listing.type === 'rent' ? 'For Rent' : 'For Sale'}
               </p>
               {listing.offer && (
-                <p className='bg-green-900 w-full max-w-[200px] text-white text-center p-1 rounded-md'>
+                <p className='bg-green-900 w-full max-w-[200px] text-white text-center p-1 rounded-md dark:text-white'>
                   ${+listing.regularPrice - +listing.discountPrice} OFF
                 </p>
               )}
             </div>
-            <p className='text-slate-800'>
-              <span className='font-semibold text-black'>Description - </span>
+            <p className='text-slate-800 dark:text-white'>
+              <span className='font-semibold text-slate-800 dark:text-white'>Description - </span>
               {listing.description}
             </p>
-            <ul className='text-green-900 font-semibold text-sm flex flex-wrap items-center gap-4 sm:gap-6'>
-              <li className='flex items-center gap-1 whitespace-nowrap '>
+            <ul className='text-green-900 font-semibold text-sm flex flex-wrap items-center gap-4 sm:gap-6 dark:text-red-900'>
+              <li className='flex items-center gap-1 whitespace-nowrap dark:text-red-900 '>
                 <FaBed className='text-lg' />
                 {listing.bedrooms > 1
                   ? `${listing.bedrooms} beds `
                   : `${listing.bedrooms} bed `}
               </li>
-              <li className='flex items-center gap-1 whitespace-nowrap '>
+              <li className='flex items-center gap-1 whitespace-nowrap dark:text-red-900 '>
                 <FaBath className='text-lg' />
                 {listing.bathrooms > 1
                   ? `${listing.bathrooms} baths `
                   : `${listing.bathrooms} bath `}
               </li>
-              <li className='flex items-center gap-1 whitespace-nowrap '>
+              <li className='flex items-center gap-1 whitespace-nowrap  dark:text-red-900'>
                 <FaParking className='text-lg' />
                 {listing.parking ? 'Parking spot' : 'No Parking'}
               </li>
-              <li className='flex items-center gap-1 whitespace-nowrap '>
+              <li className='flex items-center gap-1 whitespace-nowrap  dark:text-red-900'>
                 <FaChair className='text-lg' />
                 {listing.furnished ? 'Furnished' : 'Unfurnished'}
               </li>
