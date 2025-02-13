@@ -56,7 +56,7 @@ export default function DashSidebar() {
       }
     };
   return (
-    <Sidebar className="w-full md:w-56 h-screen flex flex-col "  >
+    <Sidebar className="w-full md:w-56 h-screen flex flex-col overflow-y-auto"  >
 
 
       <Sidebar.Items>
@@ -155,3 +155,4 @@ export default function DashSidebar() {
     </Sidebar>
   );
 }
+ 
