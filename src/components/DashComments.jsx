@@ -54,7 +54,7 @@ export default function DashComments() {
   };
 
   return (
-    <div className=' bg-white overflow-x-auto p-3  w-full'>
+    <div className=' bg-white overflow-x-auto p-3  w-full dark:bg-gray-800'>
       <h2 className="text-3xl font-semibold mb-6 text-gray-800 dark:text-gray-200">Comments Table</h2>
       {currentUser.isAdmin && comments.length > 0 ? (
         <div className='relative overflow-x-auto shadow-md sm:rounded-lg'>

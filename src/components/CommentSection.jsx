@@ -48,6 +48,7 @@ export default function CommentSection({ listingId }) {
     const controller = new AbortController();
     const fetchComments = async () => {
       try {
+        console.log("Fetched comments:", listingId);
         const res = await fetch(`/api/comments/get/${listingId}`);
         if (!res.ok) throw new Error('Failed to fetch comments');
         const data = await res.json();
