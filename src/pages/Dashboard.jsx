@@ -2,14 +2,13 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import DashSidebar from '../components/DashSidebar';
 // import DashProfile from '../components/DashProfile';
-import DashPosts from '../components/DashPosts';
-import DashUsers from '../components/DashUsers';
 import DashComments from '../components/DashComments';
+import DashPosts from '../components/DashPosts';
+import DashShowListing from '../components/DashShowListing';
+import DashUsers from '../components/DashUsers';
 import DashboardComp from '../components/DashboardComp';
 import CreateListing from './CreateListing';
 import Profile from './Profile';
-import DashShowListing from '../components/DashShowListing';
-import UpdateListing from './UpdateListing';
 
 export default function Dashboard() {
   const location = useLocation();
@@ -33,8 +32,8 @@ export default function Dashboard() {
        {tab === 'createlisting' && <CreateListing />}
         {/* show listing... */}
         {tab === 'showlisting' && <DashShowListing/>}
-      {/* posts... */}
-      {tab === 'posts' && <DashPosts />}
+      {/* listings... */}
+      {tab === 'listings' && <DashPosts />}
       {/* users */}
       {tab === 'users' && <DashUsers />}
       {/* comments  */}

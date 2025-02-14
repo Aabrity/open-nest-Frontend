@@ -1,17 +1,17 @@
 import { Sidebar } from 'flowbite-react';
+import { useEffect, useState } from 'react';
 import {
-  HiUser,
+  HiAnnotation,
   HiArrowSmRight,
+  HiChartPie,
   HiDocumentText,
   HiOutlineUserGroup,
-  HiAnnotation,
-  HiChartPie,
+  HiUser,
 } from 'react-icons/hi';
-import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
-import { signOutUserStart, deleteUserFailure, deleteUserSuccess, deleteUserStart } from '../redux/user/userSlice';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { deleteUserFailure, deleteUserStart, deleteUserSuccess, signOutUserStart } from '../redux/user/userSlice';
+import { FaPlus, FaRegFileAlt } from 'react-icons/fa';
 
 export default function DashSidebar() {
   const location = useLocation();
@@ -86,7 +86,7 @@ export default function DashSidebar() {
           <Link to='/dashboard?tab=createlisting'>
             <Sidebar.Item
               active={tab === 'createlisting'}
-              icon={HiUser}
+              icon={FaPlus}
              
               as='div'
             >
@@ -96,7 +96,7 @@ export default function DashSidebar() {
             <Link to='/dashboard?tab=showlisting'>
             <Sidebar.Item
               active={tab === 'showlisting'}
-              icon={HiUser}
+              icon={FaRegFileAlt}
              
               as='div'
             >
@@ -104,13 +104,13 @@ export default function DashSidebar() {
             </Sidebar.Item>
           </Link>
           {currentUser.isAdmin && (
-            <Link to='/dashboard?tab=posts'>
+            <Link to='/dashboard?tab=listings'>
               <Sidebar.Item
-                active={tab === 'posts'}
+                active={tab === 'listings'}
                 icon={HiDocumentText}
                 as='div'
               >
-                Posts
+                Listings
               </Sidebar.Item>
             </Link>
           )}
