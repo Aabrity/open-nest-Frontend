@@ -72,7 +72,7 @@ const ListingsTablePage = () => {
                     <img src={listing.imageUrls[0]} alt={listing.name} className="w-20 h-12 object-cover rounded" />
                   </Table.Cell>
                   <Table.Cell className="px-5 font-medium text-gray-900 dark:text-gray-100">{listing.name}</Table.Cell>
-                  <Table.Cell className="px-5 text-gray-700 dark:text-gray-300">{listing.updatedAt}</Table.Cell>
+                  <Table.Cell className="px-5 text-gray-700 dark:text-gray-300">  {new Date(listing.updatedAt).toLocaleDateString()}</Table.Cell>
                   <Table.Cell className="px-5 text-gray-700 dark:text-gray-300">{listing.address}</Table.Cell>
                   <Table.Cell className="px-5 text-gray-700 dark:text-gray-300">{listing.type}</Table.Cell>
                   <Table.Cell className="px-5 text-gray-700 dark:text-gray-300">{listing.regularPrice}</Table.Cell>
