@@ -155,7 +155,7 @@
 
 
 import { useEffect, useState } from 'react';
-import { FaBath, FaBed, FaChair, FaMapMarkerAlt, FaParking, FaShare, FaThumbsUp, FaRegThumbsUp } from 'react-icons/fa';
+import { FaBath, FaBed, FaChair, FaMapMarkerAlt, FaParking, FaShare, FaThumbsUp, FaHeart, FaRegHeart, FaRegThumbsUp } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import SwiperCore from 'swiper';
@@ -339,21 +339,28 @@ export default function Listing() {
             </ul>
 
             {/* Like/Unlike Buttons */}
-            <div className='flex items-center gap-4'>
+            <div className='flex items-center'>
               {!liked ? (
                 <button
                   onClick={handleLike}
-                  className='flex items-center gap-2 bg-blue-500 text-white rounded-lg p-3'
+                  className='flex item-center gap-2'
+                  // className='flex items-center gap-2 bg-blue-500 text-white rounded-lg p-3'
                 >
-                  <FaRegThumbsUp />
+                  <div  className='flex items-center gap-2 bg-blue-500 text-white rounded-lg p-3'>
+                  <FaRegHeart />
+                  </div>
                   Like ({likesCount})
                 </button>
+                
               ) : (
                 <button
                   onClick={handleUnlike}
-                  className='flex items-center gap-2 bg-red-500 text-white rounded-lg p-3'
+                  className='flex item-center gap-2'
+                  // className='flex items-center gap-2 bg-red-500 text-white rounded-lg p-3'
                 >
-                  <FaThumbsUp />
+                  <div className='flex items-center gap-2 bg-red-500 text-white rounded-lg p-3'>
+                  <FaHeart />
+                  </div>
                   Unlike ({likesCount})
                 </button>
               )}
