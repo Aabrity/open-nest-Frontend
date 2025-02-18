@@ -1,4 +1,5 @@
 import React from 'react'
+// import { ToastContainer } from 'react-toastify'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import SignIn from './pages/SignIn'
@@ -15,8 +16,9 @@ import Footer from './components/Footer'
 import Dashboard from './pages/Dashboard'
 export default function App() {
   return (
+    
    <BrowserRouter>
-   
+   {/* <ToastContainer /> */}
    <Header/>
    <Routes>
    <Route path='/' element={<Home />} />
@@ -30,6 +32,8 @@ export default function App() {
         <Route path='/dashboard' element={<Dashboard/>} />
         <Route path='/create-listing' element={<CreateListing />} />
         <Route path='/update-listing/:listingId' element={<UpdateListing/>} />
+ 
+
         </Route>
    </Routes>
    <Footer/>

@@ -163,6 +163,7 @@ import 'swiper/css/bundle';
 import { Navigation } from 'swiper/modules';
 import CommentSection from '../components/commentSection';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import Contact from '../components/Contact';
 
 export default function Listing() {
   SwiperCore.use([Navigation]);

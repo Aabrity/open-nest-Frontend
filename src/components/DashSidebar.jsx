@@ -56,9 +56,7 @@ export default function DashSidebar() {
       }
     };
   return (
-    <Sidebar className="w-full md:w-56 h-screen flex flex-col overflow-y-auto"  >
-
-
+    <Sidebar className="border-r-4 border-teal-500 bg-white w-full md:w-56 h-screen flex flex-col overflow-y-auto dark:bg-gray-800" >
       <Sidebar.Items>
         <Sidebar.ItemGroup className='flex flex-col flex-1 gap-3 overflow-y-auto'>
           {currentUser && currentUser.isAdmin && (

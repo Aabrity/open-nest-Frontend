@@ -36,7 +36,7 @@ export default function Header() {
   }, [location.search]);
 
   return (
-    <header className='bg-slate-200 dark:bg-gray-900 dark:text-gray-300 shadow-md'>
+    <header className='border-b-4 border-teal-500 bg-slate-200 dark:bg-gray-800 dark:text-gray-300 shadow-md'>
       <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
         <Link to='/'>
        
@@ -95,7 +95,7 @@ export default function Header() {
               {theme === 'light' ? <FaSun /> : <FaMoon />}
             </Button>
             {currentUser ? (
-              <Link to='/dashboard'>
+              <Link to='dashboard?tab=dash'>
                 <img
                   className='rounded-full h-8 w-7 object-cover'
                   src={currentUser.avatar}

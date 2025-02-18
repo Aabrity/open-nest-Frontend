@@ -4,13 +4,10 @@ import {
   updateUserStart,
   updateUserSuccess,
   updateUserFailure,
-  deleteUserFailure,
-  deleteUserStart,
-  deleteUserSuccess,
-  signOutUserStart,
+ 
 } from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+
 
 export default function Profile() {
   const fileRef = useRef(null);
@@ -78,7 +75,8 @@ export default function Profile() {
  
 
   return (
-    <div className="p-0 w-[600px] mx-auto ">
+    <div className=' w-full'>
+    <div className=" p-0 w-[600px] mx-auto ">
 
       <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
       <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
@@ -148,6 +146,7 @@ export default function Profile() {
       </p>
      
       
+    </div>
     </div>
   );
 }

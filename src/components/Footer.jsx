@@ -6,7 +6,7 @@ import darkLogo from '../assets/logo/logowhite.png'
 
 export default function FooterCom() {
   return (
-    <Footer container className='border-t-8 border-teal-500 bg-white dark:bg-gray-900 dark:text-gray-300'>
+    <Footer container className='border-t-4 border-teal-500 bg-white dark:bg-gray-800 dark:text-gray-300'>
       <div className='w-full max-w-7xl mx-auto'>
         <div className='grid w-full justify-between sm:flex md:grid-cols-1'>
        
