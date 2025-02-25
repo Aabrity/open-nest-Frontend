@@ -155,14 +155,14 @@
 
 
 import { useEffect, useState } from 'react';
-import { FaBath, FaBed, FaChair, FaMapMarkerAlt, FaParking, FaShare, FaThumbsUp, FaHeart, FaRegHeart, FaRegThumbsUp } from 'react-icons/fa';
+import { FaBath, FaBed, FaChair, FaHeart, FaMapMarkerAlt, FaParking, FaRegHeart, FaShare } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import SwiperCore from 'swiper';
 import 'swiper/css/bundle';
 import { Navigation } from 'swiper/modules';
-import CommentSection from '../components/commentSection';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import CommentSection from '../components/commentSection';
 import Contact from '../components/Contact';
 
 export default function Listing() {
@@ -370,14 +370,35 @@ export default function Listing() {
             <CommentSection listingId={listing._id}/>
 
             {/* Contact Button */}
-            {currentUser && listing.userRef !== currentUser._id && !contact && (
+            {/* {currentUser && listing.userRef !== currentUser._id && !contact && (
               <button
                 onClick={() => setContact(true)}
                 className='bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3'
               >
                 Contact landlord
               </button>
-            )}
+            )} */}
+            {currentUser && listing.userRef !== currentUser._id && !contact && (
+  currentUser.subscription ? (
+    <button
+      onClick={() => setContact(true)}
+      className='bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3'
+    >
+      Contact landlord
+    </button>
+  ) : (
+    <button
+      onClick={() => {
+        // Redirect to subscription page or show a subscription modal
+        alert('Please subscribe to contact the landlord.');
+      }}
+      className='bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3'
+    >
+      Subscribe
+    </button>
+  )
+)}
+
             {contact && <Contact listing={listing} />}
           </div>
         </div>

@@ -163,7 +163,7 @@ export default function SignIn() {
         <input
           type='email'
           placeholder='email'
-          className='border p-3 rounded-lg'
+          className='border p-3 rounded-lg dark: text-black'
           id='email'
           onChange={handleChange}
         />
@@ -172,7 +172,7 @@ export default function SignIn() {
         <input
           type='password'
           placeholder='password'
-          className='border p-3 rounded-lg'
+          className='border p-3 rounded-lg dark: text-black'
           id='password'
           onChange={handleChange}
         />

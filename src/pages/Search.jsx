@@ -139,7 +139,7 @@ export default function Search() {
               type='text'
               id='searchTerm'
               placeholder='Search...'
-              className='border rounded-lg p-3 w-full'
+              className='border rounded-lg p-3 w-full dark:text-black'
               value={sidebardata.searchTerm}
               onChange={handleChange}
             />
@@ -216,7 +216,7 @@ export default function Search() {
               onChange={handleChange}
               defaultValue={'created_at_desc'}
               id='sort_order'
-              className='border rounded-lg p-3'
+              className='border rounded-lg p-3 dark:text-black'
             >
               <option value='regularPrice_desc'>Price high to low</option>
               <option value='regularPrice_asc'>Price low to hight</option>
