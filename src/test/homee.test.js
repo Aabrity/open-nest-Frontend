@@ -33,7 +33,7 @@ test('Check the main heading and various sections', async ({ page }) => {
   await page.goto('http://localhost:5173/'); // Replace with your actual URL
 
   // Check for the main heading (search for text "Perfect" within <span> element)
-  await expect(page.locator('h1 span:has-text("Perfect")')).toBeVisible();
+  await expect(page.locator('h1 span:has-text("Home")')).toBeVisible();
 
 });
 
