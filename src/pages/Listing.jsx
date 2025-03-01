@@ -1,5 +1,3 @@
-
-
 import { useEffect, useState } from 'react';
 import { FaBath, FaBed, FaChair, FaHeart, FaMapMarkerAlt, FaParking, FaRegHeart, FaShare } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
@@ -10,6 +8,7 @@ import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import CommentSection from '../components/commentSection';
 import Contact from '../components/Contact';
+import toast from 'react-hot-toast'; 
 
 export default function Listing() {
   SwiperCore.use([Navigation]);
@@ -19,8 +18,8 @@ export default function Listing() {
   const [error, setError] = useState(false);
   const [copied, setCopied] = useState(false);
   const [contact, setContact] = useState(false);
-  const [liked, setLiked] = useState(false); 
-  const [likesCount, setLikesCount] = useState(0); 
+  const [liked, setLiked] = useState(false);
+  const [likesCount, setLikesCount] = useState(0);
   const params = useParams();
   const { currentUser } = useSelector((state) => state.user);
 
@@ -33,6 +32,7 @@ export default function Listing() {
         if (data.success === false) {
           setError(true);
           setLoading(false);
+          toast.error('Failed to fetch listing details'); 
           return;
         }
         setListing(data);
@@ -41,6 +41,7 @@ export default function Listing() {
       } catch (error) {
         setError(true);
         setLoading(false);
+        toast.error('Failed to fetch listing details'); 
       }
     };
 
@@ -51,6 +52,7 @@ export default function Listing() {
         setLikesCount(data.likesCount);
       } catch (error) {
         console.error('Failed to fetch likes count:', error);
+        toast.error('Failed to fetch likes count'); 
       }
     };
 
@@ -72,12 +74,13 @@ export default function Listing() {
       const data = await res.json();
       if (res.ok) {
         setLiked(true);
-        setLikesCount((prevCount) => prevCount + 1); 
-        // Persist the like status in localStorage with the current user ID and listing ID
+        setLikesCount((prevCount) => prevCount + 1);
         localStorage.setItem(`liked_${currentUser._id}_${params.listingId}`, 'true');
+        toast.success('Listing liked!'); 
       }
     } catch (error) {
       console.error('Error liking listing:', error);
+      toast.error('Failed to like listing'); 
     }
   };
 
@@ -87,12 +90,13 @@ export default function Listing() {
       const data = await res.json();
       if (res.ok) {
         setLiked(false);
-        setLikesCount((prevCount) => prevCount - 1); 
-        // Persist the unlike status in localStorage with the current user ID and listing ID
+        setLikesCount((prevCount) => prevCount - 1);
         localStorage.setItem(`liked_${currentUser._id}_${params.listingId}`, 'false');
+        toast.success('Listing unliked!'); 
       }
     } catch (error) {
       console.error('Error unliking listing:', error);
+      toast.error('Failed to unlike listing'); 
     }
   };
 
@@ -123,17 +127,13 @@ export default function Listing() {
               onClick={() => {
                 navigator.clipboard.writeText(window.location.href);
                 setCopied(true);
+                toast.success('Link copied to clipboard!'); 
                 setTimeout(() => {
                   setCopied(false);
                 }, 2000);
               }}
             />
           </div>
-          {copied && (
-            <p className='fixed top-[23%] right-[5%] z-10 rounded-md bg-slate-100 p-2 dark:text-white dark:bg-slate-700'>
-              Link copied!
-            </p>
-          )}
 
           <div className='flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4'>
             <p className='text-2xl font-semibold text-black dark:text-white'>
@@ -191,59 +191,47 @@ export default function Listing() {
                 <button
                   onClick={handleLike}
                   className='flex item-center gap-2'
-                  // className='flex items-center gap-2 bg-blue-500 text-white rounded-lg p-3'
                 >
-                  <div  className='flex items-center gap-2 bg-blue-500 text-white rounded-lg p-3'>
-                  <FaRegHeart />
+                  <div className='flex items-center gap-2 bg-blue-500 text-white rounded-lg p-3'>
+                    <FaRegHeart />
                   </div>
                   Like ({likesCount})
                 </button>
-                
               ) : (
                 <button
                   onClick={handleUnlike}
                   className='flex item-center gap-2'
-                  // className='flex items-center gap-2 bg-red-500 text-white rounded-lg p-3'
                 >
                   <div className='flex items-center gap-2 bg-red-500 text-white rounded-lg p-3'>
-                  <FaHeart />
+                    <FaHeart />
                   </div>
                   Unlike ({likesCount})
                 </button>
               )}
             </div>
 
-            <CommentSection listingId={listing._id}/>
+            <CommentSection listingId={listing._id} />
 
             {/* Contact Button */}
-            {/* {currentUser && listing.userRef !== currentUser._id && !contact && (
-              <button
-                onClick={() => setContact(true)}
-                className='bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3'
-              >
-                Contact landlord
-              </button>
-            )} */}
             {currentUser && listing.userRef !== currentUser._id && !contact && (
-  currentUser.subscription ? (
-    <button
-      onClick={() => setContact(true)}
-      className='bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3'
-    >
-      Contact landlord
-    </button>
-  ) : (
-    <button
-      onClick={() => {
-        // Redirect to subscription page or show a subscription modal
-        alert('Please subscribe to contact the landlord.');
-      }}
-      className='bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3'
-    >
-      Subscribe
-    </button>
-  )
-)}
+              currentUser.subscription ? (
+                <button
+                  onClick={() => setContact(true)}
+                  className='bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3'
+                >
+                  Contact landlord
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    toast.error('Please subscribe to contact the landlord.'); 
+                  }}
+                  className='bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3'
+                >
+                  Subscribe
+                </button>
+              )
+            )}
 
             {contact && <Contact listing={listing} />}
           </div>

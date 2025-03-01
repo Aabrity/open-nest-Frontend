@@ -1,5 +1,4 @@
 import React from 'react'
-// import { ToastContainer } from 'react-toastify'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import SignIn from './pages/SignIn'
@@ -14,12 +13,14 @@ import PrivateRoute from './components/PrivateRoute'
 import Search from './pages/Search'
 import Footer from './components/Footer'
 import Dashboard from './pages/Dashboard'
+import toast, { Toaster } from 'react-hot-toast';
 export default function App() {
   return (
     
    <BrowserRouter>
-   {/* <ToastContainer /> */}
    <Header/>
+   <Toaster position="top-right" reverseOrder={false}/>
+ 
    <Routes>
    <Route path='/' element={<Home />} />
         <Route path='/sign-in' element={<SignIn />} />
@@ -36,6 +37,7 @@ export default function App() {
 
         </Route>
    </Routes>
+   
    <Footer/>
    </BrowserRouter>
   )

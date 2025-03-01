@@ -1,6 +1,8 @@
+
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import toast from 'react-hot-toast'; 
 
 export default function UpdateListing() {
   const { currentUser } = useSelector((state) => state.user);
@@ -21,9 +23,7 @@ export default function UpdateListing() {
     parking: false,
     furnished: false,
   });
-  const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
-  const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -32,19 +32,18 @@ export default function UpdateListing() {
       const res = await fetch(`/api/listing/get/${listingId}`);
       const data = await res.json();
       if (data.success === false) {
-        console.log(data.message);
+        toast.error(data.message); 
         return;
       }
       setFormData(data);
     };
 
     fetchListing();
-  }, []);
+  }, [params.listingId]);
 
   const handleImageSubmit = (e) => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
       setUploading(true);
-      setImageUploadError(false);
       const promises = [];
 
       for (let i = 0; i < files.length; i++) {
@@ -56,15 +55,15 @@ export default function UpdateListing() {
             ...formData,
             imageUrls: formData.imageUrls.concat(base64Images),
           });
-          setImageUploadError(false);
+          toast.success('Images uploaded successfully!'); 
           setUploading(false);
         })
         .catch((err) => {
-          setImageUploadError('Image upload failed');
+          toast.error('Image upload failed. Please try again.'); 
           setUploading(false);
         });
     } else {
-      setImageUploadError('You can only upload 6 images per listing');
+      toast.error('You can only upload 6 images per listing.'); 
       setUploading(false);
     }
   };
@@ -84,6 +83,7 @@ export default function UpdateListing() {
       ...formData,
       imageUrls: formData.imageUrls.filter((_, i) => i !== index),
     });
+    toast.success('Image removed successfully!'); 
   };
 
   const handleChange = (e) => {
@@ -120,12 +120,15 @@ export default function UpdateListing() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (formData.imageUrls.length < 1)
-        return setError('You must upload at least one image');
-      if (+formData.regularPrice < +formData.discountPrice)
-        return setError('Discount price must be lower than regular price');
+      if (formData.imageUrls.length < 1) {
+        toast.error('You must upload at least one image.'); 
+        return;
+      }
+      if (+formData.regularPrice < +formData.discountPrice) {
+        toast.error('Discount price must be lower than regular price.'); 
+        return;
+      }
       setLoading(true);
-      setError(false);
       const res = await fetch(`/api/listing/update/${params.listingId}`, {
         method: 'POST',
         headers: {
@@ -139,11 +142,13 @@ export default function UpdateListing() {
       const data = await res.json();
       setLoading(false);
       if (data.success === false) {
-        setError(data.message);
+        toast.error(data.message); 
+        return;
       }
+      toast.success('Listing updated successfully!'); 
       navigate(`/listing/${data._id}`);
     } catch (error) {
-      setError(error.message);
+      toast.error('Failed to update listing. Please try again.'); 
       setLoading(false);
     }
   };
@@ -314,7 +319,7 @@ export default function UpdateListing() {
           <div className='flex gap-4'>
             <input
               onChange={(e) => setFiles(e.target.files)}
-              className='p-3 border border-gray-300 rounded w-full'
+              className='p-3 border border-gray-300 rounded w-full dark:bg-gray-800 dark:text-white dark:border-gray-700'
               type='file'
               id='images'
               accept='image/*'
@@ -329,9 +334,6 @@ export default function UpdateListing() {
               {uploading ? 'Uploading...' : 'Upload'}
             </button>
           </div>
-          <p className='text-red-700 text-sm'>
-            {imageUploadError && imageUploadError}
-          </p>
           {formData.imageUrls.length > 0 &&
             formData.imageUrls.map((base64Image, index) => (
               <div
